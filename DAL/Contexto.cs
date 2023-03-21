@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-public class Contexto : DbContext
+public class Contexto :DbContext
 {
     public DbSet<Productos> Productos { get; set; }
+    public DbSet<Empaquetados> Empacados {get; set;}
 
-    public Contexto(DbContextOptions<Contexto> options) : base(options)
+    public Contexto(DbContextOptions<Contexto> options) :base(options)
     {
-
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
