@@ -9,5 +9,4 @@ public class Productos
     public Double Costo { get; set; }
     public Double Precio { get; set; }
     public int Existencia { get; set; }
-    public decimal Gramos { get; set; }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Empaquetados
 {
     [Key]
-    public int EmpacadoId { get; set; }
+    public int EmpaqueId { get; set; }
     [Required(ErrorMessage ="campo obligatorio.")]
     public DateOnly Fecha { get; set; }
     [Required(ErrorMessage ="campo obligatorio.")]

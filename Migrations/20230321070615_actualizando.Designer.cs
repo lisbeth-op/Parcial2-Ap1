@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SegundoParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230321053248_actualizando")]
+    [Migration("20230321070615_actualizando")]
     partial class actualizando
     {
         /// <inheritdoc />
@@ -46,7 +46,7 @@ namespace SegundoParcial.Migrations
 
             modelBuilder.Entity("Empaquetados", b =>
                 {
-                    b.Property<int>("EmpacadoId")
+                    b.Property<int>("EmpaqueId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -64,7 +64,7 @@ namespace SegundoParcial.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("EmpacadoId");
+                    b.HasKey("EmpaqueId");
 
                     b.ToTable("Empacados");
                 });
@@ -84,9 +84,6 @@ namespace SegundoParcial.Migrations
                     b.Property<int>("Existencia")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Gramos")
-                        .HasColumnType("TEXT");
-
                     b.Property<double>("Precio")
                         .HasColumnType("REAL");
 
@@ -101,7 +98,6 @@ namespace SegundoParcial.Migrations
                             Costo = 15.0,
                             Descripcion = "Pistacho",
                             Existencia = 50,
-                            Gramos = 0m,
                             Precio = 50.0
                         },
                         new
@@ -110,7 +106,6 @@ namespace SegundoParcial.Migrations
                             Costo = 15.0,
                             Descripcion = "Mani",
                             Existencia = 50,
-                            Gramos = 0m,
                             Precio = 50.0
                         },
                         new
@@ -119,7 +114,6 @@ namespace SegundoParcial.Migrations
                             Costo = 15.0,
                             Descripcion = "Ciruela",
                             Existencia = 50,
-                            Gramos = 0m,
                             Precio = 50.0
                         },
                         new
@@ -128,7 +122,6 @@ namespace SegundoParcial.Migrations
                             Costo = 15.0,
                             Descripcion = "Pasas",
                             Existencia = 50,
-                            Gramos = 0m,
                             Precio = 50.0
                         },
                         new
@@ -137,7 +130,6 @@ namespace SegundoParcial.Migrations
                             Costo = 15.0,
                             Descripcion = "Arandanos",
                             Existencia = 50,
-                            Gramos = 0m,
                             Precio = 50.0
                         });
                 });
