@@ -20,12 +20,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Aplicada1/SegundoParcial/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Aplicada1/SegundoParcial/Pages/Consultas/Productos_C.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXFByb2R1Y3Rvc19DLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Aplicada1/SegundoParcial/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Aplicada1/SegundoParcial/Pages/Registros/Productos_R.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFByb2R1Y3Rvc19SLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Aplicada1/SegundoParcial/Shared/SurveyPrompt.razor]
