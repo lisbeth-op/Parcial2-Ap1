@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SegundoParcial.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class actualizando : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -10,23 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<ProductosBLL>();
+builder.Services.AddScoped<EmpaquetadosBLL>();
 var ConStr =builder.Configuration.GetConnectionString("ConStr");
 builder.Services.AddDbContext<Contexto>(options=>options.UseSqlite(ConStr));
 
 var app = builder.Build();
-
-
-// inyectar contexto
-
-
-
-
-
-
-
-
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

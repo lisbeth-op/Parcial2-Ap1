@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SegundoParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230321002508_Inicial")]
-    partial class Inicial
+    [Migration("20230321005504_actualizando")]
+    partial class actualizando
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
