@@ -1,7 +1,8 @@
 @page "/productos"
+@page "/Productos_R/{EmpaqueId:int}"
 @inject EmpaquetadosBLL EmpaquetadosBLL
 @inject ProductosBLL ProductosBLL
-
+@inject NotificationService notificationService
 <EditForm Model="producidos" OnInvalidSubmit="Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -49,48 +50,48 @@
                         <label for="select" class="form-label">Producto:</label>
                         <InputSelect class="form-select" @bind-Value="detalleEmpaquetados.ProductoId">
                             @foreach (var producto in listaProductos)
-                            {
-                                <option value="@producto.ProductoId">@producto.Descripcion</option>
-                            }
-                        </InputSelect>
+                                {
+                                    <option value="@producto.ProductoId">@producto.Descripcion</option>
+                                }
+                            </InputSelect>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="txtEjemplo" class="form-label">Cantidad:</label>
+                            <input type="number" id="txtEjemplo" class="form-control" @bind-value="detalleEmpaquetados.Cantidad">
+                        </div>
+
+                        <div class="col-sm-4 d-flex align-items-end">
+                            <button name="BtnAgregar" id="BtnAgregar" class="btn btn-primary" @onclick="Agregar">Agregar</button>
+                        </div>
                     </div>
 
-                    <div class="col-sm-4">
-                        <label for="txtEjemplo" class="form-label">Cantidad:</label>
-                        <input type="number" id="txtEjemplo" class="form-control" @bind-value="detalleEmpaquetados.Cantidad">
-                    </div>
-
-                    <div class="col-sm-4 d-flex align-items-end">
-                        <button name="BtnAgregar" id="BtnAgregar" class="btn btn-primary" @onclick="Agregar">Agregar</button>
-                    </div>
-                </div>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ProdcutoId</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var detalle in producidos.detalleEmpaquetados)
-                        {
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>@detalle.ProductoId</td>
-                                <td>@detalle.Descripcion</td>
-                                <td>@detalle.Cantidad</td>
-                                <td>
-                                <button name="Btn" id="Btn" class="btn btn-danger mr-2"
+                                <th>ProdcutoId</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var detalle in producidos.detalleEmpaquetados)
+                            {
+                                <tr>
+                                    <td>@detalle.ProductoId</td>
+                                    <td>@detalle.Descripcion</td>
+                                    <td>@detalle.Cantidad</td>
+                                    <td>
+                                        <button name="Btn" id="Btn" class="btn btn-danger mr-2"
                                     @onclick=@(() => EliminarDetalle(detalle.DetalleEmpacadosId))>
-                                    <span class="oi oi-trash"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
+                                            <span class="oi oi-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
             </table>
             <label> Total = @producidos.Cantidad</label>
 
@@ -122,6 +123,10 @@
 
 
 @code {
+
+    [Parameter]
+    public int EmpaqueId{ get; set;}
+
     public Empaquetados producidos { get; set; } = new Empaquetados();
     public Productos producto { get; set; } = new Productos();
     public DetalleEmpaquetados detalleEmpaquetados { get; set; } = new DetalleEmpaquetados();
@@ -130,7 +135,7 @@
     protected override void OnInitialized()
     {
         listaProductos = ProductosBLL.GetList(o => true);
-
+        detalleEmpaquetados = new DetalleEmpaquetados();
 
     }
 
@@ -148,6 +153,12 @@
             producto.Costo = 15;
             ProductosBLL.Guardar(producto);
             Nuevo();
+            ShowNotification(
+                 new NotificationMessage
+                     {
+                         Severity = NotificationSeverity.Info,
+                         Summary = "Guardado correctamente"
+                     });
         }
 
     }
@@ -200,6 +211,12 @@
             {
                 ProductosBLL.Eliminar(producto);
                 Nuevo();
+                ShowNotification(
+                   new NotificationMessage
+                       {
+                           Severity = NotificationSeverity.Info,
+                           Summary = "Eliminado correctamente"
+                       });
             }
         }
 
@@ -236,6 +253,11 @@
             return true;
         }
     }
+    void ShowNotification(NotificationMessage message)
+    {
+        notificationService.Notify(message);
+    }
+
 
 
 }
