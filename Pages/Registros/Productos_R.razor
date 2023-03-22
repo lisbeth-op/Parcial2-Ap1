@@ -5,72 +5,89 @@
 <EditForm Model="producidos" OnInvalidSubmit="Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="card">
+   
 
-        <div class="card-header ">
-            <h3> Empaquetado de frutos mixtos</h3>
+    <div class="card">
+    <div class="card-header">
+        <h3>Empaquetado de frutos mixtos</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="txtId" class="form-label">Id:</label>
+                <input type="number" id="txtId" class="form-control" @bind-value="producidos.EmpaqueId">
+            </div>
+
+            <div class="col-sm-9">
+                <button name="BtnBuscar" id="BtnBuscar" class="btn btn-primary" @onclick="Buscar">Buscar</button>
+            </div>
         </div>
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col-3">
-                    <label for="txtId" class="form-label"> Id:</label>
-                    <input type="number" id="txtId" class="form-control" @bind-value="producidos.EmpaqueId">
-                </div>
-
-            </div>
-            <button name="BtnBuscar" id="BtnBuscar" class="btn btn-primary mr-2" @onclick="Buscar"> Buscar </button>
-
-            <div class="row">
-                <div class="col-6">
-                    <label for="txtFecha" class="form-label"> Fecha:</label>
-                    <input type="date" id="txtFecha" class="form-control" @bind-value="producidos.Fecha">
-                    <ValidationMessage For="@(() => producidos.Fecha)" />
-                </div>
-                <div class="col-6">
-                    <label for="txtConcepto" class="form-label"> Concepto:</label>
-                    <input type="text" id="txtConcepto" class="form-control" @bind-value="producidos.Concepto">
-                    <ValidationMessage For="@(() => producidos.Concepto)" />
-                </div>
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <label for="txtFecha" class="form-label">Fecha:</label>
+                <input type="date" id="txtFecha" class="form-control" @bind-value="producidos.Fecha">
+                <ValidationMessage For="@(() => producidos.Fecha)" />
             </div>
 
-
-            <h3>Utilizados</h3>
-
-            <div class="row">
-                <div class="col-4">
-                    <label for="select" class="form-label">Producto:</label>
-                    <InputSelect class="form-select" @bind-Value="detalleEmpaquetados.ProductoId">
-                        @foreach (var producto in listaProductos)
-                        {
-                            <option value="@producto.ProductoId">@producto.Descripcion</option>
-                        }
-                    </InputSelect>
-                </div>
-
-                <div class="col-4">
-                    <label for="select" class="form-label">Cantidad</label>
-                    <input type="number" id="txtEjemplo" class="form-control"
-                        @bind-value="detalleEmpaquetados.Cantidad">
-                </div>
+            <div class="col-sm-6">
+                <label for="txtConcepto" class="form-label">Concepto:</label>
+                <input type="text" id="txtConcepto" class="form-control" @bind-value="producidos.Concepto">
+                <ValidationMessage For="@(() => producidos.Concepto)" />
             </div>
-            <button name="BtnAgregar" id="BtnAgregar" class="btn btn-primary mr-2" @onclick="Agregar"> Agregar </button>
+        </div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ProdcutoId</th>
-                        <th>Descripcion</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var detalle in producidos.detalleEmpaquetados)
-                    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4>Utilizados</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label for="select" class="form-label">Producto:</label>
+                        <InputSelect class="form-select" @bind-Value="detalleEmpaquetados.ProductoId">
+                            @foreach (var producto in listaProductos)
+                            {
+                                <option value="@producto.ProductoId">@producto.Descripcion</option>
+                            }
+                        </InputSelect>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="txtEjemplo" class="form-label">Cantidad:</label>
+                        <input type="number" id="txtEjemplo" class="form-control" @bind-value="detalleEmpaquetados.Cantidad">
+                    </div>
+
+                    <div class="col-sm-4 d-flex align-items-end">
+                        <button name="BtnAgregar" id="BtnAgregar" class="btn btn-primary" @onclick="Agregar">Agregar</button>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@detalle.ProductoId</td>
-                            <td>@detalle.Descripcion</td>
-                            <td>@detalle.Cantidad</td>
+                            <th>ProdcutoId</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var detalle in producidos.detalleEmpaquetados)
+                        {
+                            <tr>
+                                <td>@detalle.ProductoId</td>
+                                <td>@detalle.Descripcion</td>
+                                <td>@detalle.Cantidad</td>
+                                <td>
+                                <button name="Btn" id="Btn" class="btn btn-danger mr-2"
+                                    @onclick=@(() => EliminarDetalle(detalle.DetalleEmpacadosId))>
+                                    <span class="oi oi-trash"></span>
+                                </button>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -98,7 +115,8 @@
             <button name="BtnEliminar" id="BtnEliminar" class="btn btn-danger mr-2" @onclick="Eliminar"> Eliminar
             </button>
         </div>
-
+        </div>
+        </div>
     </div>
 </EditForm>
 
@@ -136,18 +154,21 @@
 
     void Buscar()
     {
-        var encontrado = EmpaquetadosBLL.Buscar(producidos.EmpaqueId);
-        if (encontrado != null)
-        {
-            producidos = encontrado;
-            var productoEncontrado = ProductosBLL.Buscar(producidos.Producido);
-            if (productoEncontrado != null)
-            {
-                producto = productoEncontrado;
-            }
+        var empacadoEncontrado = EmpaquetadosBLL.Buscar(producidos.EmpaqueId);
 
+        if (empacadoEncontrado == null)
+        {
+            return;
         }
 
+        producidos = empacadoEncontrado;
+
+        var productoEncontrado = ProductosBLL.Buscar(producidos.Producido);
+
+        if (productoEncontrado != null)
+        {
+            producto = productoEncontrado;
+        }
     }
     void Agregar()
     {
@@ -183,14 +204,38 @@
         }
 
     }
+    void EliminarDetalle(int IdDetalle)
+    {
+        if (producidos.detalleEmpaquetados == null || IdDetalle <= 0)
+        {
+            return;
+        }
+
+        producidos.detalleEmpaquetados.RemoveAll(d => d.DetalleEmpacadosId == IdDetalle);
+
+        int cantidadTotal = producidos.detalleEmpaquetados.Sum(c => c.Cantidad);
+        producidos.Cantidad = cantidadTotal;
+
+        if (producto != null)
+        {
+            producto.Existencia = cantidadTotal * 5;
+        }
+    }
+
     bool Validar()
     {
-        bool validacion = true;
-        if (String.IsNullOrEmpty(producidos.Concepto)) { validacion = false; }
-        if (producidos.Cantidad < 2) { validacion = false; }
-        if (producidos.detalleEmpaquetados.Count < 2) { validacion = false; }
-
-        return validacion;
+        if (String.IsNullOrEmpty(producidos.Concepto) ||
+            producidos.Cantidad < 2 ||
+            producidos.detalleEmpaquetados.Count < 2 ||
+            String.IsNullOrEmpty(producidos.Producido))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
+
 
 }

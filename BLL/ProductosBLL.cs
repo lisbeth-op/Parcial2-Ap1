@@ -43,7 +43,7 @@ public class ProductosBLL
     }
     public Productos? Buscar(String Nombre)
     {
-        return _Contexto.Productos.Where(o => o.Descripcion == Nombre).AsTracking().SingleOrDefault();
+        return _Contexto.Productos.Where(p => p.Descripcion == Nombre).AsTracking().SingleOrDefault();
     }
 
     public bool Eliminar(Productos producto)
@@ -54,7 +54,7 @@ public class ProductosBLL
 
     public Productos? Buscar(int id)
     {
-        return _Contexto.Productos.Where(o => o.ProductoId == id).AsTracking().SingleOrDefault();
+        return _Contexto.Productos.Where(p => p.ProductoId == id).AsTracking().SingleOrDefault();
     }
 
 }
