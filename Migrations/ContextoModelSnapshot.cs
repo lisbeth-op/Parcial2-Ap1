@@ -72,6 +72,7 @@ namespace SegundoParcial.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Existencia")

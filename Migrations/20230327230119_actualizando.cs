@@ -35,7 +35,7 @@ namespace SegundoParcial.Migrations
                 {
                     ProductoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Descripcion = table.Column<string>(type: "TEXT", nullable: true),
+                    Descripcion = table.Column<string>(type: "TEXT", nullable: false),
                     Costo = table.Column<double>(type: "REAL", nullable: false),
                     Precio = table.Column<double>(type: "REAL", nullable: false),
                     Existencia = table.Column<int>(type: "INTEGER", nullable: false)

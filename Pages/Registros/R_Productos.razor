@@ -1,0 +1,131 @@
+﻿@inject ProductosBLL ProductosBLL
+@inject NotificationService notificationService
+@page "/productos"
+<EditForm Model="producto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Producto</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label for="txtId" class="form-label">Id:</label>
+                    <input type="number" id="txtId" class="form-control" @bind-value="producto.ProductoId">
+                </div>
+
+                <div class="col-sm-9">
+                    <button type="button" class="btn btn-primary" @onclick="Buscar">Buscar</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="txtConcepto" class="form-label">Descripcion:</label>
+                <input type="text" id="txtConcepto" class="form-control" @bind-value="producto.Descripcion">
+                <ValidationMessage For="@(() => producto.Descripcion)" />
+            </div>
+            <div class="col-sm-6">
+                <label for="txtConcepto" class="form-label">Costo:</label>
+                <input type="text" id="txtConcepto" class="form-control" @bind-value="producto.Costo">
+                <ValidationMessage For="@(() => producto.Costo)" />
+            </div>
+
+            <div class="col-sm-6">
+                <label for="txtConcepto" class="form-label">Precio:</label>
+                <input type="text" id="txtConcepto" class="form-control" @bind-value="producto.Precio">
+                <ValidationMessage For="@(() => producto.Precio)" />
+            </div>
+            <div class="col-sm-6">
+                <label for="txtConcepto" class="form-label">Existencia:</label>
+                <input type="text" id="txtConcepto" class="form-control" @bind-value="producto.Existencia">
+                <ValidationMessage For="@(() => producto.Existencia)" />
+            </div>
+
+
+
+     
+
+                <div class="card-footer text-centerc">
+                    <button type="button" class="btn btn-primary mr-2" @onclick="Nuevo"> Nuevo </button>
+                    <button type="submit" name="BtnGuardar" id="BtnGuardar" class="btn btn-success mr-2"> Guardar </button>
+                    <button type="button" class="btn btn-danger mr-2" @onclick="Eliminar">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+     </div
+</EditForm>
+
+
+
+
+
+
+@code {
+
+
+
+
+    [Parameter]
+    public int ProductoId { get; set; }
+    public Productos producto { get; set; } = new Productos();
+
+    protected override void OnInitialized()
+    {
+        if (ProductoId > 0)
+        {
+
+            this.producto.ProductoId = ProductoId;
+            this.Buscar();
+        }
+    }
+
+    void Buscar()
+    {
+
+        var ProductoEncontrado = ProductosBLL.Buscar(producto.ProductoId);
+        if (ProductoEncontrado != null)
+            this.producto = ProductoEncontrado;
+
+    }
+    void Nuevo()
+    {
+        this.producto = new Productos();
+    }
+
+
+    void Guardar()
+    {
+        if (ProductosBLL.Guardar(this.producto))
+   
+             Nuevo();
+            ShowNotification(
+                 new NotificationMessage
+                     {
+                         Severity = NotificationSeverity.Success,
+                         Summary = "Guardado correctamente"
+                     });
+    }
+
+    void Eliminar()
+    {
+        if (ProductosBLL.Eliminar(this.producto))
+          Nuevo();
+            ShowNotification(
+                 new NotificationMessage
+                     {
+                         Severity = NotificationSeverity.Success,
+                         Summary = "Eliminado correctamente"
+                     });
+    }
+
+
+
+
+    void ShowNotification(NotificationMessage message)
+    {
+        notificationService.Notify(message);
+    }
+}

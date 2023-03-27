@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SegundoParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230327194028_actualizando")]
+    [Migration("20230327230119_actualizando")]
     partial class actualizando
     {
         /// <inheritdoc />
@@ -75,6 +75,7 @@ namespace SegundoParcial.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Existencia")

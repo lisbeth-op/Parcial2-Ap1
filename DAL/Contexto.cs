@@ -1,18 +1,18 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class Contexto :DbContext
+public class Contexto : DbContext
 {
     public DbSet<Productos> Productos { get; set; }
-    public DbSet<Empaquetados> Empacados {get; set;}
+    public DbSet<Empaquetados> Empacados { get; set; }
 
-    public Contexto(DbContextOptions<Contexto> options) :base(options)
+    public Contexto(DbContextOptions<Contexto> options) : base(options)
     {
-        
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); 
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Productos>().HasData(
                 new Productos
                 {
@@ -46,7 +46,7 @@ public class Contexto :DbContext
                      Precio = 50,
                      Existencia = 50
                  },
-                 
+
                  new Productos
                  {
                      ProductoId = 5,
