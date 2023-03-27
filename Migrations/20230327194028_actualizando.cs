@@ -19,9 +19,9 @@ namespace SegundoParcial.Migrations
                 {
                     EmpaqueId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Fecha = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Concepto = table.Column<string>(type: "TEXT", nullable: false),
-                    Producido = table.Column<string>(type: "TEXT", nullable: false),
+                    ProductoId = table.Column<int>(type: "INTEGER", nullable: false),
                     Cantidad = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -51,17 +51,16 @@ namespace SegundoParcial.Migrations
                 {
                     DetalleEmpacadosId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    EmpacadosId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EmpaqueId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Cantidad = table.Column<int>(type: "INTEGER", nullable: false),
-                    Descripcion = table.Column<string>(type: "TEXT", nullable: true)
+                    Cantidad = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DetalleEmpaquetados", x => x.DetalleEmpacadosId);
                     table.ForeignKey(
-                        name: "FK_DetalleEmpaquetados_Empacados_EmpacadosId",
-                        column: x => x.EmpacadosId,
+                        name: "FK_DetalleEmpaquetados_Empacados_EmpaqueId",
+                        column: x => x.EmpaqueId,
                         principalTable: "Empacados",
                         principalColumn: "EmpaqueId",
                         onDelete: ReferentialAction.Cascade);
@@ -76,13 +75,14 @@ namespace SegundoParcial.Migrations
                     { 2, 15.0, "Mani", 50, 50.0 },
                     { 3, 15.0, "Ciruela", 50, 50.0 },
                     { 4, 15.0, "Pasas", 50, 50.0 },
-                    { 5, 15.0, "Arandanos", 50, 50.0 }
+                    { 5, 15.0, "Arandanos", 50, 50.0 },
+                    { 6, 15.0, "empacado Frutos mixtos ", 0, 50.0 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetalleEmpaquetados_EmpacadosId",
+                name: "IX_DetalleEmpaquetados_EmpaqueId",
                 table: "DetalleEmpaquetados",
-                column: "EmpacadosId");
+                column: "EmpaqueId");
         }
 
         /// <inheritdoc />

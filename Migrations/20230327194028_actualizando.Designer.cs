@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SegundoParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230321070615_actualizando")]
+    [Migration("20230327194028_actualizando")]
     partial class actualizando
     {
         /// <inheritdoc />
@@ -28,10 +28,7 @@ namespace SegundoParcial.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("EmpacadosId")
+                    b.Property<int>("EmpaqueId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProductoId")
@@ -39,7 +36,7 @@ namespace SegundoParcial.Migrations
 
                     b.HasKey("DetalleEmpacadosId");
 
-                    b.HasIndex("EmpacadosId");
+                    b.HasIndex("EmpaqueId");
 
                     b.ToTable("DetalleEmpaquetados");
                 });
@@ -57,12 +54,11 @@ namespace SegundoParcial.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("Fecha")
+                    b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Producido")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("EmpaqueId");
 
@@ -131,6 +127,14 @@ namespace SegundoParcial.Migrations
                             Descripcion = "Arandanos",
                             Existencia = 50,
                             Precio = 50.0
+                        },
+                        new
+                        {
+                            ProductoId = 6,
+                            Costo = 15.0,
+                            Descripcion = "empacado Frutos mixtos ",
+                            Existencia = 0,
+                            Precio = 50.0
                         });
                 });
 
@@ -138,7 +142,7 @@ namespace SegundoParcial.Migrations
                 {
                     b.HasOne("Empaquetados", null)
                         .WithMany("detalleEmpaquetados")
-                        .HasForeignKey("EmpacadosId")
+                        .HasForeignKey("EmpaqueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

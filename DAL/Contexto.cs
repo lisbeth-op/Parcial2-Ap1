@@ -54,7 +54,15 @@ public class Contexto :DbContext
                      Costo = 15,
                      Precio = 50,
                      Existencia = 50
-                 }
+                 },
+                   new Productos
+                   {
+                       ProductoId = 6,
+                       Descripcion = "empacado Frutos mixtos ",
+                       Costo = 15,
+                       Precio = 50,
+                       Existencia = 0
+                   }
         );
     }
 }

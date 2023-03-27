@@ -6,13 +6,13 @@ public class Empaquetados
     [Key]
     public int EmpaqueId { get; set; }
     [Required(ErrorMessage ="campo obligatorio.")]
-    public DateOnly Fecha { get; set; }
+    public DateTime Fecha { get; set; }= DateTime.Now;  
     [Required(ErrorMessage ="campo obligatorio.")]
     public String? Concepto { get; set; }
     [Required(ErrorMessage ="campo obligatorio.")]
-    public String? Producido { get; set; }
+    public int ProductoId { get; set; }
     [Required(ErrorMessage ="campo obligatorio.")]
     public int Cantidad { get; set; }
-    [ForeignKey("EmpacadosId")]
+    [ForeignKey("EmpaqueId")]
     public List<DetalleEmpaquetados> detalleEmpaquetados { get; set; } = new List<DetalleEmpaquetados>();
 }

@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="card text-primary">
             <div class="card-header text-center">
-                <h3>Consulta Nuevos productos</h3>
+                <h3>Consulta empaquetados </h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -19,11 +19,10 @@
                     <div class="col-2">
                         <label class="form-label">Filtro</label>
                         <select class="form-control" @bind="Filtro">
-                            <option value="1">EmpacadoId</option>
+                            <option value="1">Empacado Id</option>
                             <option value="2">Fecha</option>
                             <option value="3">Concepto </option>
-                            <option value="4">Producido</option>
-                            <option value="5">Cantidad</option>
+                            <option value="4">Cantida producidad</option>
                         </select>
                     </div>
                     <div class="col-3 d-flex align-items-end">
@@ -36,11 +35,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>EmpacadoId</th>
+                            <th>Empacado Id</th>
                             <th>Fecha</th>
                             <th>Concepto</th>
-                            <th>Producido</th>
-                            <th>Cantidad</th>
+                            <th>Cantidad Producida</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -53,9 +51,8 @@
                                     <td>@N_product.EmpaqueId</td>
                                     <td>@N_product.Fecha</td>
                                     <td>@N_product.Concepto</td>
-                                    <td>@N_product.Producido</td>
-                                    <td>@N_product.Cantidad</td>
-                                    <td><a href="Productos_R/@N_product.EmpaqueId">Ver</a></td>
+                                    <td>@N_product.Cantidad </td>
+                                    <td><a href="/@N_product.EmpaqueId">Ver</a></td>
                                 </tr>
                             }
                         }
@@ -94,10 +91,6 @@
                 break;
 
             case "4":
-                lista = creados.GetList(o => (o.Producido ?? "").Contains(Criterio));
-                break;
-
-            case "5":
                 lista = creados.GetList(o => o.Cantidad.ToString().Contains(Criterio));
                 break;
 
