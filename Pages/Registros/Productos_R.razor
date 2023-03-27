@@ -59,6 +59,7 @@
                         <div class="col-sm-4">
                             <label for="txtEjemplo" class="form-label">Cantidad:</label>
                             <input type="number" id="txtEjemplo" class="form-control" @bind-value="detalleEmpaquetados.Cantidad">
+                            <ValidationMessage For="@(() => producidos.Cantidad)" />
                         </div>
 
                         <div class="col-sm-4 d-flex align-items-end">
