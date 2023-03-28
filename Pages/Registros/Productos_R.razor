@@ -179,10 +179,24 @@
 
         if (empacadoEncontrado == null)
         {
+            ShowNotification(
+                   new NotificationMessage
+                       {
+                           Severity = NotificationSeverity.Success,
+                           Summary = "ID no existe"
+                       });
             return;
+           
+
         }
 
         producidos = empacadoEncontrado;
+        ShowNotification(
+                   new NotificationMessage
+                       {
+                           Severity = NotificationSeverity.Success,
+                           Summary = "ID encontrado"
+                       });
 
 
     }
