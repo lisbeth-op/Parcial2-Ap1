@@ -88,7 +88,7 @@
                                         <td>@producto.Descripcion</td>
                                         <td>@detalle.Cantidad</td>
                                         <td>
-                                            <button name="Btn" id="Btn" class="btn btn-danger mr-2"
+                                            <button type="button" class="btn btn-danger mr-2"
                                             @onclick=@(() => EliminarDetalle(detalle.DetalleEmpacadosId))>
                                                 <span class="oi oi-trash"></span>
                                             </button>
@@ -209,7 +209,7 @@
 
             var productoencontrado = ProductosBLL.Buscar(detalleEmpaquetados.ProductoId);
             if (productoencontrado != null && productoencontrado.Existencia < detalleEmpaquetados.Cantidad)
-            {
+           {
                 ShowNotification(
                     new NotificationMessage
                         {
@@ -266,7 +266,7 @@
 
     bool Validar()
     {
-        if (String.IsNullOrEmpty(producidos.Concepto) ||
+        if (
             producidos.Cantidad < 2 ||
             producidos.detalleEmpaquetados.Count < 2)
         {
