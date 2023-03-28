@@ -113,7 +113,13 @@ public class EmpaquetadosBLL
         }
         _Contexto.Database.ExecuteSqlRaw($"DELETE FROM DetalleEmpaquetados WHERE EmpaqueId = {empaquetado.EmpaqueId}");
 
+        var ProductoAnterior = _Contexto.Productos.Find(empaquetado.ProductoId);
 
+        if (ProductoAnterior != null)
+        {
+            ProductoAnterior.Existencia -= empaquetado.Cantidad;
+            _Contexto.Entry(ProductoAnterior).State = EntityState.Modified;
+        }
         _Contexto.Entry(empaquetado).State = EntityState.Deleted;
         bool saveSucceded = _Contexto.SaveChanges() > 0;
 

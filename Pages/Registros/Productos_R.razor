@@ -158,6 +158,12 @@
     {
         if (!Validar())
         {
+            ShowNotification(
+                 new NotificationMessage
+                     {
+                         Severity = NotificationSeverity.Warning,
+                         Summary = "Se necesitan al menos dos detalle"
+                     });
             return;
         }
         if (EmpaquetadosBLL.Guardar(producidos))
@@ -182,7 +188,7 @@
             ShowNotification(
                    new NotificationMessage
                        {
-                           Severity = NotificationSeverity.Success,
+                           Severity = NotificationSeverity.Info,
                            Summary = "ID no existe"
                        });
             return;
@@ -191,12 +197,7 @@
         }
 
         producidos = empacadoEncontrado;
-        ShowNotification(
-                   new NotificationMessage
-                       {
-                           Severity = NotificationSeverity.Success,
-                           Summary = "ID encontrado"
-                       });
+       
 
 
     }
@@ -207,10 +208,23 @@
         {
 
             var productoencontrado = ProductosBLL.Buscar(detalleEmpaquetados.ProductoId);
+            if (productoencontrado != null && productoencontrado.Existencia < detalleEmpaquetados.Cantidad)
+            {
+                ShowNotification(
+                    new NotificationMessage
+                        {
+                            Severity = NotificationSeverity.Error,
+                            Summary = "Esa cantida no esta disponible"
+                        });
+                return;
+            }
             producidos.detalleEmpaquetados.Add(detalleEmpaquetados);
+
+
             detalleEmpaquetados = new DetalleEmpaquetados();
 
         }
+
 
     }
     void Nuevo()
